@@ -134,8 +134,8 @@ class Page1:
             self.label.config(text="Rekaman suara anda berhasil")
             self.master.update()
 
-            model_path = "best_model_parkinson_augmenteddd2.h5"
-            scaler_path = 'scaler_parkinson_combined_augmenteddd2.pkl'
+            model_path = "best_model_parkinson_augmented.h5"
+            scaler_path = 'scaler_parkinson_combined_augmented.pkl'
 
             predicted_label, prediction = predict_new_audio(file_name, model_path, scaler_path)
             label_map = {0: "Sehat", 1: "Parkinson"}
