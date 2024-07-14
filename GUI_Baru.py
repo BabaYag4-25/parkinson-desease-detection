@@ -138,7 +138,7 @@ class Page1:
             scaler_path = 'scaler_parkinson_combined_augmented.pkl'
 
             predicted_label, prediction = predict_new_audio(file_name, model_path, scaler_path)
-            label_map = {0: "Sehat", 1: "Parkinson"}
+            label_map = {0: "Non-Parkinson", 1: "Parkinson"}
             result = label_map[predicted_label[0]]
             confidence = prediction[0][predicted_label[0]]
 
