@@ -99,13 +99,13 @@ def build_enhanced_model(input_shape):
 
 # Memuat data latih dengan augmentasi
 data_dir_parkinson_train = "E:/Universitas Brawijaya/SEMESTER 8/Tes Alat/Add Ons/Testing/Dataset Suara/parkinson fr"
-data_dir_healthy_train = "E:/Universitas Brawijaya/SEMESTER 8/Tes Alat/Add Ons/Testing/Dataset Suara/healthy fr"
+data_dir_Non-Parkinson_train = "E:/Universitas Brawijaya/SEMESTER 8/Tes Alat/Add Ons/Testing/Dataset Suara/non-parkinson fr"
 features_parkinson_train, labels_parkinson_train = load_data_and_extract_features_with_augmentation(data_dir_parkinson_train)
-features_healthy_train, labels_healthy_train = load_data_and_extract_features_with_augmentation(data_dir_healthy_train)
+features_Non-Parkinson_train, labels_Non-Parkinson_train = load_data_and_extract_features_with_augmentation(data_dir_Non-Parkinson_train)
 
 # Menggabungkan data latih
-features_train = np.concatenate((features_parkinson_train, features_healthy_train), axis=0)
-labels_train = np.concatenate((labels_parkinson_train, labels_healthy_train), axis=0)
+features_train = np.concatenate((features_parkinson_train, features_Non-Parkinson_train), axis=0)
+labels_train = np.concatenate((labels_parkinson_train, labels_Non-Parkinson_train), axis=0)
 
 # Normalisasi data
 scaler = StandardScaler()
@@ -125,19 +125,19 @@ model = build_enhanced_model(input_shape)
 # Callbacks
 early_stopping = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=10, restore_best_weights=True)
 reduce_lr = tf.keras.callbacks.ReduceLROnPlateau(monitor='val_loss', factor=0.2, patience=10, min_lr=0.00001)
-model_checkpoint = tf.keras.callbacks.ModelCheckpoint("best_model_parkinson_augmenteddd2.h5", monitor='val_accuracy', save_best_only=True)
+model_checkpoint = tf.keras.callbacks.ModelCheckpoint("best_model_parkinson_augmented.h5", monitor='val_accuracy', save_best_only=True)
 
 # Latih model
 history = model.fit(X_train, y_train, validation_data=(X_val, y_val), epochs=250, batch_size=64, callbacks=[early_stopping, reduce_lr, model_checkpoint])
 
 # Evaluasi model pada data uji
-model = tf.keras.models.load_model("best_model_parkinson_augmenteddd2.h5")
+model = tf.keras.models.load_model("best_model_parkinson_augmented.h5")
 evaluation = model.evaluate(X_val, y_val)
 print(f"Validation Loss: {evaluation[0]}")
 print(f"Validation Accuracy: {evaluation[1]}")
 
 # Simpan scaler
-joblib.dump(scaler, 'scaler_parkinson_combined_augmenteddd2.pkl')
+joblib.dump(scaler, 'scaler_parkinson_combined_augmented.pkl')
 
 # Plot Confusion Matrix
 predictions = model.predict(X_val)
