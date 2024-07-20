@@ -63,17 +63,17 @@ def classify_test_data(model_path, scaler_path, data_dir_test):
             print("Hasil Klasifikasi: Sehat")
 
     cm = confusion_matrix(labels_test, predicted_labels)
-    sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=['Healthy', 'Parkinson'], yticklabels=['Healthy', 'Parkinson'])
+    sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=['Non-Parkinson', 'Parkinson'], yticklabels=['Non-Parkinson', 'Parkinson'])
     plt.xlabel('Predicted')
     plt.ylabel('True')
     plt.show()
 
-    print(classification_report(labels_test, predicted_labels, target_names=['Healthy', 'Parkinson']))
+    print(classification_report(labels_test, predicted_labels, target_names=['Non-Parkinson', 'Parkinson']))
     print("F1-Score:", f1_score(labels_test, predicted_labels, average='weighted'))
 
 # Path model dan scaler yang telah disimpan
-model_path = "best_model_parkinson_augmenteddd2.h5"
-scaler_path = "scaler_parkinson_combined_augmenteddd2.pkl"
+model_path = "best_model_parkinson_augmented.h5"
+scaler_path = "scaler_parkinson_combined_augmented.pkl"
 
 # Path data uji
 data_dir_test = "E:/Universitas Brawijaya/SEMESTER 8/Tes Alat/Add Ons/Testing/Uji/"
