@@ -39,4 +39,4 @@ This project aims to detect Parkinson's disease using a machine learning model b
 - Provides an easy-to-use interface for non-technical users.
 
 ## Author
-Developed by [Your Name] as part of a research project on Parkinson's disease detection using voice analysis and deep learning.
+Developed by Ahmad Ghifari as part of a research project on Parkinson's disease detection using voice analysis and deep learning.
